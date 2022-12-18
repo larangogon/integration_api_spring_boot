@@ -1,6 +1,7 @@
 package com.springBootTesting.springBootTesting.controller.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springBootTesting.springBootTesting.helpers.responseBase;
-import com.springBootTesting.springBootTesting.interfaz.appApi;
+import com.springBootTesting.springBootTesting.interfaz.apiInterface;
 import com.springBootTesting.springBootTesting.model.Movie;
 import com.springBootTesting.springBootTesting.services.movieService;
 
@@ -25,7 +27,7 @@ import com.springBootTesting.springBootTesting.services.movieService;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/moviesDB")
-public class movieController extends responseBase implements appApi{
+public class movieController extends responseBase implements apiInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
 
@@ -41,22 +43,24 @@ public class movieController extends responseBase implements appApi{
         return new ResponseEntity<List<Movie>>(movies, null, HttpStatus.SC_ACCEPTED);
     }
 
-    @Override
-    @DeleteMapping("/delete")
-    public String delete() {
-        LOG.info("api/delete");
-        return null;
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Boolean> deleteMovie(@PathVariable ("id") int id){
+        movieServices.deleteMovie(id);
+        return ResponseEntity.ok(!movieServices.existById(id));
     }
 
     @PostMapping("/api/create")
-    public ResponseEntity<Movie> create (@Validated @RequestBody Movie movie){
+    public ResponseEntity<Movie>create(@Validated @RequestBody Movie movie){
         return ResponseEntity.status(HttpStatus.SC_CREATED).body(movieServices.saveMovie(movie));
     }
 
-    @Override
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Optional<Movie>> findStudentById(@PathVariable ("id") int id){
+        return ResponseEntity.status(HttpStatus.SC_OK).body(movieServices.findById(id));
+    }
+
     @PutMapping("/update")
-    public String update() {
-        LOG.info("api/update");
-        return null;
+    public ResponseEntity<Movie> updateMovie(@Validated @RequestBody Movie movie){
+        return ResponseEntity.status(HttpStatus.SC_CREATED).body(movieServices.editMovie(movie));
     }
 }

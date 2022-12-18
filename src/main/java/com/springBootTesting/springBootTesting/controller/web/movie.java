@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springBootTesting.springBootTesting.helpers.responseBase;
-import com.springBootTesting.springBootTesting.interfaz.appWeb;
+import com.springBootTesting.springBootTesting.interfaz.webInterface;
 import com.springBootTesting.springBootTesting.model.Movie;
-import com.springBootTesting.springBootTesting.services.movieDb;
+import com.springBootTesting.springBootTesting.services.movieDbService;
 import com.springBootTesting.springBootTesting.services.movieService;
 
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
@@ -22,11 +22,11 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 @CrossOrigin
 @RestController
 @RequestMapping("/moviesDB")
-public class movie extends responseBase implements appWeb{
+public class movie extends responseBase implements webInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movie.class);
 
-    private movieDb movieServiceDb;
+    private movieDbService movieServiceDb;
 
     private movieService movieServices;
 

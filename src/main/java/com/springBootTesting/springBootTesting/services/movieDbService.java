@@ -16,9 +16,9 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 @Service
 @CrossOrigin
-public class movieDb extends responseBase implements movieDbInterface{
+public class movieDbService extends responseBase implements movieDbInterface{
 
-    private static final Logger LOG = LoggerFactory.getLogger(movieDb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(movieDbService.class);
 
     public MovieDb getMovieInfoDB(@PathVariable("movieId") Integer movieId) {
 
