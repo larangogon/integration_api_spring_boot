@@ -3,6 +3,7 @@ package com.springBootTesting.springBootTesting.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springBootTesting.springBootTesting.Repoisitory.movieRepository;
@@ -11,8 +12,8 @@ import com.springBootTesting.springBootTesting.model.Movie;
 @Service
 public class movieService {
 
+    @Autowired
     private movieRepository genreRepository;
-
 
     public List<Movie> getAllMovies() {
         List<Movie> list = (List<Movie>) genreRepository.findAll();
@@ -21,14 +22,10 @@ public class movieService {
     }
 
     public Movie saveMovie(Movie movie){
-        if (movie.getTitle() == null){
-            return genreRepository.save(movie);
-        }
-        
-        return null;
+        return genreRepository.save(movie);
     }
 
-    public void deleteMovie(int id){
+    public void deleteMovie(Integer id){
         genreRepository.deleteById(id);
     }
 
@@ -39,11 +36,11 @@ public class movieService {
         return null;
     }
 
-    public boolean existById(int id) {
+    public boolean existById(Integer id) {
         return genreRepository.existsById(id);
     }
 
-    public Optional<Movie> findById(int id){
+    public Optional<Movie> findById(Integer id){
         return genreRepository.findById(id);
     }
     

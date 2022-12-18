@@ -15,33 +15,33 @@ public class Movie {
 	@Column(name = "id")
 	private Integer id;
 
-    @Column(name = "id_external")
-	private Integer id_external;
+    @Column(name = "external_id", nullable = false)
+	private Integer external_id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false, length = 255)
 	private String title;
 
-    @Column(name = "overview")
+    @Column(name = "overview", nullable = false, length = 525)
 	private String overview;
 
-    @Column(name = "release_date")
+    @Column(name = "release_date", nullable = false)
 	private String release_date;
 
-	public int getIdMovie() {
+	public Movie(Integer id, String title, String releaseDate, String overview) {
+        super();
+        this.external_id = id;
+        this.title =  title;
+        this.overview = overview;
+        this.release_date = releaseDate;
+
+    }
+
+    public Integer getIdMovie() {
         return id;
     }
 
-    public void setIdMovie(int id) {
+    public void setIdMovie(Integer id) {
         this.id = id;
-    }
-
-
-	public int getExternalId() {
-        return id_external;
-    }
-
-    public void setExternalId(int idExternal) {
-        this.id_external = idExternal;
     }
 
 	public String getTitle() {

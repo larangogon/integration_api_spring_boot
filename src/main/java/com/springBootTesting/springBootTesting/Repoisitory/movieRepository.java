@@ -1,9 +1,9 @@
 package com.springBootTesting.springBootTesting.Repoisitory;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.springBootTesting.springBootTesting.model.Movie;
 
-public interface movieRepository extends CrudRepository<Movie, Integer>{
-    
-}
+@Repository
+public interface movieRepository extends JpaRepository<Movie, Integer>{}

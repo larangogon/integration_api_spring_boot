@@ -12,3 +12,13 @@
 4. No mostrar más 20 películas en la carga inicial, Construir un paginador para controlar la cantidad de data
 proveniente de la API (GET)
 5. Construir endpoint de detalle de cada película usando toda la información que ofrece la Api (GET por ID).
+
+## Intalacion
+Para su uso ejecute lo siguiente
+
+### Api:
+
+1. http://127.0.0.1:8080/api/moviesDB/create/list : consuma esta api para que su base de datos cuente con la tada necesaria para disponibilizarla.
+
+2. 
+

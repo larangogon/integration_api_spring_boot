@@ -2,8 +2,6 @@ package com.springBootTesting.springBootTesting.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.springBootTesting.springBootTesting.helpers.responseBase;
@@ -14,8 +12,6 @@ import info.movito.themoviedbapi.TmdbMovies;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
-@Service
-@CrossOrigin
 public class movieDbService extends responseBase implements movieDbInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movieDbService.class);

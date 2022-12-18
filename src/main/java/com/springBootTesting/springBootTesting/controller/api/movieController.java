@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,23 +36,42 @@ public class movieController extends responseBase implements apiInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
 
+    @Autowired
     private movieService movieServices;
 
-    private movieDbService movieServiceDb;
+    protected movieDbService movieServiceDb = new movieDbService();
 
-    
-    @GetMapping("/create/list")
-    public MovieResultsPage createMoviesList() {
-        LOG.info("createMoviesList");
+    @GetMapping("/list")
+    public List<MovieDb> moviesList() {
+        LOG.info("moviesList");
 
-        //guardar en d data
         MovieResultsPage data =  movieServiceDb.getPopularMovies();
 
-        return data;
+        return data.getResults();
+    }
+
+    @GetMapping("/create/list")
+    public List<MovieDb> createMoviesList() {
+        LOG.info("createMoviesList");
+
+        List<MovieDb> list = this.moviesList();
+
+        for (MovieDb cadena: list) {
+            Movie movie = new Movie(
+                cadena.getId(),
+                cadena.getOriginalTitle(),
+                cadena.getReleaseDate(),
+                cadena.getOverview()
+            );
+
+            movieServices.saveMovie(movie);
+        }
+
+        return list;
     }
 
     @GetMapping(value = "/show/{id}")
-    public MovieDb gMovieResultsPage(@PathVariable ("id") int id) {
+    public MovieDb gMovieResultsPage(@PathVariable ("id") Integer id) {
         LOG.info("createMoviesList");
 
         MovieDb data =  movieServiceDb.getMovieInfoDB(id);
@@ -70,8 +90,9 @@ public class movieController extends responseBase implements apiInterface{
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Boolean> deleteMovie(@PathVariable ("id") int id){
+    public ResponseEntity<Boolean> deleteMovie(@PathVariable ("id") Integer id){
         movieServices.deleteMovie(id);
+
         return ResponseEntity.ok(!movieServices.existById(id));
     }
 
@@ -81,10 +102,12 @@ public class movieController extends responseBase implements apiInterface{
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Movie>> findById(@PathVariable ("id") int id){
+    public ResponseEntity<Optional<Movie>> findById(@PathVariable ("id") Integer id){
 
-        if (movieServices.findById(id) == null)
-        return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+        if (movieServices.findById(id) == null){
+            return (ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null));
+        }
+    
         
         return ResponseEntity.status(HttpStatus.SC_OK).body(movieServices.findById(id));
     }

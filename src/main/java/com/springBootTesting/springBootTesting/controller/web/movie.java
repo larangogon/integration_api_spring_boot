@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +57,7 @@ public class movie extends responseBase implements webInterface{
 
     @Override
     @GetMapping("/update")
-    public String update(Movie movie) {
+    public String update(Movie movie, Model model) {
         LOG.info("update");
 
         movieServices.editMovie(movie);
@@ -65,7 +66,7 @@ public class movie extends responseBase implements webInterface{
     }
 
     @PostMapping("/create")
-    public String create(Movie movie) {
+    public String create(Movie movie, Model model) {
         movieServices.saveMovie(movie);
 
         return "redirect:/";
