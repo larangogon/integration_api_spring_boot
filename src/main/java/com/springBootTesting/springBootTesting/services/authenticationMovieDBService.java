@@ -12,9 +12,9 @@ import info.movito.themoviedbapi.TmdbAuthentication;
 import info.movito.themoviedbapi.model.config.TokenSession;
 
 @Service
-public class authenticationMovieDBCervice extends responseBase implements authenticationApi{
+public class authenticationMovieDBService extends responseBase implements authenticationApi{
 
-    private static final Logger LOG = LoggerFactory.getLogger(authenticationMovieDBCervice.class);
+    private static final Logger LOG = LoggerFactory.getLogger(authenticationMovieDBService.class);
 
     public TokenSession getGuestSessionToken() {
         LOG.info("getGuestSessionToken...");
