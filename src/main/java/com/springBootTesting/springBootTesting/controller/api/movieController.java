@@ -6,8 +6,13 @@ import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +32,7 @@ public class movieController extends responseBase implements appApi{
     private movieService movieServices;
 
     @Override
-    @GetMapping("/api/index")
+    @GetMapping("/index")
     public ResponseEntity<List<Movie>> index() {
         LOG.info("api/index");
 
@@ -37,21 +42,19 @@ public class movieController extends responseBase implements appApi{
     }
 
     @Override
-    @GetMapping("/api/delete")
+    @DeleteMapping("/delete")
     public String delete() {
         LOG.info("api/delete");
         return null;
     }
 
-    @Override
-    @GetMapping("/api/create")
-    public String create() {
-        LOG.info("api/create");
-        return null;
+    @PostMapping("/api/create")
+    public ResponseEntity<Movie> create (@Validated @RequestBody Movie movie){
+        return ResponseEntity.status(HttpStatus.SC_CREATED).body(movieServices.saveMovie(movie));
     }
 
     @Override
-    @GetMapping("/api/update")
+    @PutMapping("/update")
     public String update() {
         LOG.info("api/update");
         return null;

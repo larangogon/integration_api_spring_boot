@@ -18,5 +18,13 @@ public class movieService {
         
         return list;
     }
+
+    public Movie saveMovie (Movie movie){
+        if (movie.getTitle() == null){
+            return genreRepository.save(movie);
+        }
+        
+        return null;
+    }
     
 }
