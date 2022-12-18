@@ -2,6 +2,7 @@ package com.springBootTesting.springBootTesting.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.springBootTesting.springBootTesting.helpers.responseBase;
 import com.springBootTesting.springBootTesting.interfacesServices.authenticationApi;
@@ -14,10 +15,13 @@ public class authenticationMovieDBService extends responseBase implements authen
 
     private static final Logger LOG = LoggerFactory.getLogger(authenticationMovieDBService.class);
 
+    @Value("${my.apikey}")
+    private String apiKey;
+    
     public TokenSession getGuestSessionToken() {
         LOG.info("getGuestSessionToken...");
 
-        TmdbAuthentication auth = new TmdbApi("cad0d95925c6869c60ed49f550af6c90").getAuthentication();
+        TmdbAuthentication auth = new TmdbApi(apiKey).getAuthentication();
 
         TokenSession token = auth.getGuestSessionToken();
 
@@ -27,7 +31,7 @@ public class authenticationMovieDBService extends responseBase implements authen
     public TokenSession getAuthentication() {
         LOG.info("getAuthentication...");
 
-        TmdbAuthentication auth = new TmdbApi("<apikey>").getAuthentication();
+        TmdbAuthentication auth = new TmdbApi(apiKey).getAuthentication();
 
         TokenSession token = auth.getGuestSessionToken();
 

@@ -2,6 +2,7 @@ package com.springBootTesting.springBootTesting.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.springBootTesting.springBootTesting.helpers.responseBase;
@@ -16,11 +17,15 @@ public class movieDbService extends responseBase implements movieDbInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movieDbService.class);
 
+    @Value("${my.apikey}")
+    private String apiKey;
+
     public MovieDb getMovieInfoDB(@PathVariable("movieId") Integer movieId) {
 
+        LOG.info("user_apiKey=" + apiKey);
         LOG.info("Detail of the movie in api bd...");
 
-        TmdbMovies movies = new TmdbApi("cad0d95925c6869c60ed49f550af6c90").getMovies();
+        TmdbMovies movies = new TmdbApi(apiKey).getMovies();
 
         MovieDb movie = movies.getMovie(movieId, "en"); 
 
@@ -31,7 +36,7 @@ public class movieDbService extends responseBase implements movieDbInterface{
     public MovieResultsPage getPopularMovies() {
         LOG.info("getPopularMovies...");
 
-        TmdbMovies movies = new TmdbApi("cad0d95925c6869c60ed49f550af6c90").getMovies();
+        TmdbMovies movies = new TmdbApi(apiKey).getMovies();
 
         MovieResultsPage moviesPMovieResultsPage = movies.getPopularMovies(null, null);
 
@@ -42,7 +47,7 @@ public class movieDbService extends responseBase implements movieDbInterface{
 
         LOG.info("ratingMovie");
 
-        TmdbMovies movies = new TmdbApi("cad0d95925c6869c60ed49f550af6c90").getMovies();
+        TmdbMovies movies = new TmdbApi(apiKey).getMovies();
 
         MovieResultsPage movie = movies.getTopRatedMovies("en", movieId);
 
