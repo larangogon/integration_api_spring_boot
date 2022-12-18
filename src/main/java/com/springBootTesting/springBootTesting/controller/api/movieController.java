@@ -31,7 +31,7 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/moviesDB")
+@RequestMapping("/api/movies")
 public class movieController extends responseBase implements apiInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
@@ -82,7 +82,7 @@ public class movieController extends responseBase implements apiInterface{
     @Override
     @GetMapping("/index")
     public ResponseEntity<List<Movie>> index() {
-        LOG.info("api/index");
+        LOG.info("/index");
 
         List<Movie> movies = (List<Movie>) movieServices.getAllMovies();
 
@@ -96,7 +96,7 @@ public class movieController extends responseBase implements apiInterface{
         return ResponseEntity.ok(!movieServices.existById(id));
     }
 
-    @PostMapping("/api/create")
+    @PostMapping("/create")
     public ResponseEntity<Movie>create(@Validated @RequestBody Movie movie){
         return ResponseEntity.status(HttpStatus.SC_CREATED).body(movieServices.saveMovie(movie));
     }
@@ -104,7 +104,9 @@ public class movieController extends responseBase implements apiInterface{
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Movie>> findById(@PathVariable ("id") Integer id){
 
-        if (movieServices.findById(id) == null){
+        if (!movieServices.existById(id)){
+            LOG.info("No Existe modelo con este id: " + id);
+            
             return (ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null));
         }
     

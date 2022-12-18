@@ -27,13 +27,14 @@ public class Movie {
     @Column(name = "release_date", nullable = false)
 	private String release_date;
 
+    public Movie() {}
+
 	public Movie(Integer id, String title, String releaseDate, String overview) {
         super();
         this.external_id = id;
-        this.title =  title;
+        this.title = title;
         this.overview = overview;
         this.release_date = releaseDate;
-
     }
 
     public Integer getIdMovie() {

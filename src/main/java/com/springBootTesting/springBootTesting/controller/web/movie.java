@@ -23,7 +23,7 @@ import com.springBootTesting.springBootTesting.services.movieService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/moviesDB")
+@RequestMapping("/movies")
 public class movie extends responseBase implements webInterface{
 
     private static final Logger LOG = LoggerFactory.getLogger(movie.class);
