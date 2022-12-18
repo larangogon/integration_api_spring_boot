@@ -82,6 +82,10 @@ public class movieController extends responseBase implements apiInterface{
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Movie>> findById(@PathVariable ("id") int id){
+
+        if (movieServices.findById(id) == null)
+        return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+        
         return ResponseEntity.status(HttpStatus.SC_OK).body(movieServices.findById(id));
     }
 
