@@ -70,7 +70,7 @@ public class movieController extends responseBase implements apiInterface{
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Movie>> findStudentById(@PathVariable ("id") int id){
+    public ResponseEntity<Optional<Movie>> findById(@PathVariable ("id") int id){
         return ResponseEntity.status(HttpStatus.SC_OK).body(movieServices.findById(id));
     }
 

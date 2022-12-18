@@ -1,13 +1,16 @@
 package com.springBootTesting.springBootTesting.controller.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +31,11 @@ public class movie extends responseBase implements webInterface{
 
     @Override
     @RequestMapping("/")
-    public ModelAndView index(Integer page, Integer size, Boolean enablePagination) {
+    public ModelAndView index(   
+        @RequestParam(required = false, defaultValue = "0") Integer page,
+        @RequestParam(required = false, defaultValue = "20") Integer size,
+        @RequestParam(required = false, defaultValue = "false") Boolean enablePagination
+    ) {
         LOG.info("index");
 
         List<Movie> list = (List<Movie>) movieServices.getAllMovies();
@@ -41,50 +48,39 @@ public class movie extends responseBase implements webInterface{
     }
 
     @Override
-    @GetMapping("/delete/{movieId}")
-    public ModelAndView delete(@PathVariable("movieId") Integer movieId) {
-        LOG.info("delete");
-     
-        ModelAndView mav = new ModelAndView("/");
-
-        mav.addObject("movie", "movie");
-
-        return mav;
+    public String delete(@PathVariable int id, Movie model) {
+        movieServices.deleteMovie(id);
+       
+        return "redirect:/";
     }
 
     @Override
-    @GetMapping("/update/{movieId}")
-    public ModelAndView update() {
+    @GetMapping("/update")
+    public String update(Movie movie) {
         LOG.info("update");
+
+        movieServices.editMovie(movie);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/create")
+    public String create(Movie movie) {
+        movieServices.saveMovie(movie);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/show/{id}")
+    public ModelAndView show(@PathVariable("id") int id) {
+      
+        Optional<Movie> movie = movieServices.findById(id);
+       
         ModelAndView mav = new ModelAndView("show");
 
-        mav.addObject("movie", "movie");
+        mav.addObject("movie", movie);
 
         return mav;
     }
 
-    @Override
-    @GetMapping("/create")
-    public ModelAndView create() {
-        LOG.info("create");
-
-        ModelAndView mav = new ModelAndView("show");
-
-        mav.addObject("movie", "movie");
-
-        return mav;
-    }
-
-    @Override
-    @GetMapping("show/{movieId}")
-    public ModelAndView show(@PathVariable("movieId") Integer movieI) {
-        LOG.info("show");
-
-
-        ModelAndView mav = new ModelAndView("show");
-
-        mav.addObject("movie", "movie");
-
-        return mav;
-    }
 }
