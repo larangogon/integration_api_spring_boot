@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springBootTesting.springBootTesting.helpers.responseBase;
 import com.springBootTesting.springBootTesting.interfaz.apiInterface;
 import com.springBootTesting.springBootTesting.model.Movie;
+import com.springBootTesting.springBootTesting.services.movieDbService;
 import com.springBootTesting.springBootTesting.services.movieService;
+
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 
 @CrossOrigin
@@ -32,6 +35,18 @@ public class movieController extends responseBase implements apiInterface{
     private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
 
     private movieService movieServices;
+
+    private movieDbService movieServiceDb;
+
+    
+    @GetMapping("/create/list")
+    public MovieResultsPage createMoviesList() {
+        LOG.info("createMoviesList");
+
+        MovieResultsPage data =  movieServiceDb.getPopularMovies();
+
+        return data;
+    }
 
     @Override
     @GetMapping("/index")

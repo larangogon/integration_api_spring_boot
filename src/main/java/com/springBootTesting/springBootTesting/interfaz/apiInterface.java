@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.springBootTesting.springBootTesting.model.Movie;
 
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
+
 public interface apiInterface {
 
+    public MovieResultsPage createMoviesList();
     public ResponseEntity<List<Movie>> index();
     public ResponseEntity<Boolean>deleteMovie(@PathVariable ("id") int id);
     public ResponseEntity<Movie> updateMovie(@Validated @RequestBody Movie movie);
