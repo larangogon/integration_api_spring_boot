@@ -24,6 +24,7 @@ import com.springBootTesting.springBootTesting.model.Movie;
 import com.springBootTesting.springBootTesting.services.movieDbService;
 import com.springBootTesting.springBootTesting.services.movieService;
 
+import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 
@@ -43,7 +44,17 @@ public class movieController extends responseBase implements apiInterface{
     public MovieResultsPage createMoviesList() {
         LOG.info("createMoviesList");
 
+        //guardar en d data
         MovieResultsPage data =  movieServiceDb.getPopularMovies();
+
+        return data;
+    }
+
+    @GetMapping(value = "/show/{id}")
+    public MovieDb gMovieResultsPage(@PathVariable ("id") int id) {
+        LOG.info("createMoviesList");
+
+        MovieDb data =  movieServiceDb.getMovieInfoDB(id);
 
         return data;
     }
