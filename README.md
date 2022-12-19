@@ -1,7 +1,7 @@
 # integration_api_spring_boot
 
 ### Descripcion:
-- Utilizando JAVA y spring boot
+- Utilizando JAVA spring boot y MYSQL
 - Realizar un consumo para llenar nuestra base de datos con la informacion que se disponibiliza en el api    https://www.themoviedb.org/documentation/api
 
 ### Detalle
