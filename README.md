@@ -16,7 +16,7 @@ proveniente de la API (GET)
 ## Intalacion
 Para su uso ejecute lo siguiente
 
-### Api:
+### Api Externa:
 
 1. GET: http://127.0.0.1:8080/api/movies/create/list : consuma este endpoint para que su base de datos cuente con la tada necesaria para disponibilizarla.
 
@@ -25,6 +25,8 @@ Para su uso ejecute lo siguiente
 3.  GET: http://127.0.0.1:8080/api/movies/show/{id}: esta api de levolvera la informacion sobre una pelicula disponible desde la api themoviedb
 
 ________________________________________________________________________________________________________
+
+### Api:
 
 4.  GET: http://127.0.0.1:8080/api/movies/index: lista las peliculas que tenemos en nuestra base de datos
 5.  GET: http://127.0.0.1:8080/api/movies/4: ver el detalle de un modelo

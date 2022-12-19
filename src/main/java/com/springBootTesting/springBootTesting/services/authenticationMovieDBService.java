@@ -27,14 +27,4 @@ public class authenticationMovieDBService extends responseBase implements authen
 
         return token;
     }
-
-    public TokenSession getAuthentication() {
-        LOG.info("getAuthentication...");
-
-        TmdbAuthentication auth = new TmdbApi(apiKey).getAuthentication();
-
-        TokenSession token = auth.getGuestSessionToken();
-
-        return token;
-    }
 }

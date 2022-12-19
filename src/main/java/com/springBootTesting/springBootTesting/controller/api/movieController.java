@@ -26,7 +26,6 @@ import com.springBootTesting.springBootTesting.services.movieDbService;
 import com.springBootTesting.springBootTesting.services.movieService;
 
 import info.movito.themoviedbapi.model.MovieDb;
-import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 
 @CrossOrigin
@@ -41,20 +40,11 @@ public class movieController extends responseBase implements apiInterface{
 
     protected movieDbService movieServiceDb = new movieDbService();
 
-    @GetMapping("/list")
-    public List<MovieDb> moviesList() {
-        LOG.info("moviesList");
-
-        MovieResultsPage data =  movieServiceDb.getPopularMovies();
-
-        return data.getResults();
-    }
-
     @GetMapping("/create/list")
     public List<MovieDb> createMoviesList() {
         LOG.info("createMoviesList");
 
-        List<MovieDb> list = this.moviesList();
+        List<MovieDb> list = (new movieDbController()).moviesList();
 
         for (MovieDb cadena: list) {
             Movie movie = new Movie(
@@ -68,15 +58,6 @@ public class movieController extends responseBase implements apiInterface{
         }
 
         return list;
-    }
-
-    @GetMapping(value = "/show/{id}")
-    public MovieDb gMovieResultsPage(@PathVariable ("id") Integer id) {
-        LOG.info("createMoviesList");
-
-        MovieDb data =  movieServiceDb.getMovieInfoDB(id);
-
-        return data;
     }
 
     @Override
