@@ -39,3 +39,7 @@ ________________________________________________________________________________
 1. GET: http://127.0.0.1:8080/movies/: lista las peliculas que tenemos en nuestra base de datos
 2. GET: http://127.0.0.1:8080/movies/show/1: ver el detalle de un modelo
 
+### Uso de Swagger.
+
+http://localhost:8080/swagger-ui/index.html
+
