@@ -51,6 +51,18 @@ public class movie extends responseBase implements webInterface{
         return mav;
     }
 
+    @GetMapping("/show/{id}")
+    public ModelAndView show(@PathVariable("id") int id) {
+      
+        Optional<Movie> movie = movieServices.findById(id);
+       
+        ModelAndView mav = new ModelAndView("show");
+
+        mav.addObject("movie", movie);
+
+        return mav;
+    }
+
     @Override
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id, Movie model) {
@@ -75,17 +87,4 @@ public class movie extends responseBase implements webInterface{
 
         return "redirect:/";
     }
-
-    @GetMapping("/show/{id}")
-    public ModelAndView show(@PathVariable("id") int id) {
-      
-        Optional<Movie> movie = movieServices.findById(id);
-       
-        ModelAndView mav = new ModelAndView("show");
-
-        mav.addObject("movie", movie);
-
-        return mav;
-    }
-
 }

@@ -15,8 +15,8 @@ public class Movie {
 	@Column(name = "id")
 	private Integer id;
 
-    @Column(name = "external_id", nullable = false)
-	private Integer external_id;
+    @Column(name = "externalId", nullable = false)
+	private Integer externalId;
 
     @Column(name = "title", nullable = false, length = 255)
 	private String title;
@@ -24,17 +24,17 @@ public class Movie {
     @Column(name = "overview", nullable = false, length = 525)
 	private String overview;
 
-    @Column(name = "release_date", nullable = false)
-	private String release_date;
+    @Column(name = "releaseDate", nullable = false)
+	private String releaseDate;
 
     public Movie() {}
 
-	public Movie(Integer id, String title, String releaseDate, String overview) {
+	public Movie(Integer externalId, String title, String releaseDate, String overview) {
         super();
-        this.external_id = id;
+        this.externalId = externalId;
         this.title = title;
         this.overview = overview;
-        this.release_date = releaseDate;
+        this.releaseDate = releaseDate;
     }
 
     public Integer getIdMovie() {
@@ -43,6 +43,14 @@ public class Movie {
 
     public void setIdMovie(Integer id) {
         this.id = id;
+    }
+
+	public Integer getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(Integer externalId) {
+        this.externalId = externalId;
     }
 
 	public String getTitle() {
@@ -62,10 +70,10 @@ public class Movie {
     }
 
 	public String getReleaseDate() {
-        return release_date;
+        return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
-        this.release_date = releaseDate;
+        this.releaseDate = releaseDate;
     }
 }

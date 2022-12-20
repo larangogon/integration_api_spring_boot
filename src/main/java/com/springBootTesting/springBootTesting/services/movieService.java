@@ -13,35 +13,42 @@ import com.springBootTesting.springBootTesting.model.Movie;
 public class movieService {
 
     @Autowired
-    private movieRepository genreRepository;
+    private movieRepository movieRepository;
 
     public List<Movie> getAllMovies() {
-        List<Movie> list = (List<Movie>) genreRepository.findAll();
+        List<Movie> list = (List<Movie>) movieRepository.findAll();
         
         return list;
     }
 
     public Movie saveMovie(Movie movie){
-        return genreRepository.save(movie);
+        if(movieRepository.findByExternalId(movie.getExternalId()) == null){
+            return movieRepository.save(movie);
+        }
+
+        return movie;
     }
 
     public void deleteMovie(Integer id){
-        genreRepository.deleteById(id);
+        movieRepository.deleteById(id);
     }
 
     public Movie editMovie(Movie movie){
-        if (movie.getTitle() != null && genreRepository.existsById(movie.getIdMovie())){
-            return genreRepository.save(movie);
+        if (movieRepository.findByExternalId(movie.getExternalId()) != null
+            && movieRepository.existsById(movie.getIdMovie())
+        ){
+            return movieRepository.save(movie);
         }
-        return null;
+
+            return null;
     }
 
     public boolean existById(Integer id) {
-        return genreRepository.existsById(id);
+        return movieRepository.existsById(id);
     }
 
     public Optional<Movie> findById(Integer id){
-        return genreRepository.findById(id);
+        return movieRepository.findById(id);
     }
     
 }
