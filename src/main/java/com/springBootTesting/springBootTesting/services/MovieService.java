@@ -22,7 +22,7 @@ public class MovieService {
     }
 
     public Movie saveMovie(Movie movie){
-        if(movieRepository.findByExternalId(movie.getExternalId()) == null){
+        if(movieRepository.findByExternalId(movie.getExternalId()).isEmpty()){
             return movieRepository.save(movie);
         }
 
@@ -34,7 +34,7 @@ public class MovieService {
     }
 
     public Movie editMovie(Movie movie){
-        if (movieRepository.findByExternalId(movie.getExternalId()) != null
+        if (movieRepository.findByExternalId(movie.getExternalId()).isEmpty()
             && movieRepository.existsById(movie.getIdMovie())
         ){
             return movieRepository.save(movie);
@@ -50,5 +50,4 @@ public class MovieService {
     public Optional<Movie> findById(Integer id){
         return movieRepository.findById(id);
     }
-    
 }
