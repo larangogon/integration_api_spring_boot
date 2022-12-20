@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springBootTesting.springBootTesting.helpers.responseBase;
-import com.springBootTesting.springBootTesting.interfaz.apiInterface;
+import com.springBootTesting.springBootTesting.helpers.ResponseBase;
+import com.springBootTesting.springBootTesting.interfaz.ApiInterface;
 import com.springBootTesting.springBootTesting.model.Movie;
-import com.springBootTesting.springBootTesting.services.movieDbService;
-import com.springBootTesting.springBootTesting.services.movieService;
+import com.springBootTesting.springBootTesting.services.MovieService;
 
 import info.movito.themoviedbapi.model.MovieDb;
 
@@ -31,20 +30,18 @@ import info.movito.themoviedbapi.model.MovieDb;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/movies")
-public class movieController extends responseBase implements apiInterface{
+public class MovieApiController extends ResponseBase implements ApiInterface{
 
-    private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MovieApiController.class);
 
     @Autowired
-    private movieService movieServices;
-
-    protected movieDbService movieServiceDb = new movieDbService();
+    private MovieService movieServices;
 
     @GetMapping("/create/list")
     public List<MovieDb> createMoviesList() {
         LOG.info("createMoviesList");
 
-        List<MovieDb> list = (new movieDbController()).moviesList();
+        List<MovieDb> list = (new MovieDbController()).moviesList();
 
         for (MovieDb cadena: list) {
             Movie movie = new Movie(

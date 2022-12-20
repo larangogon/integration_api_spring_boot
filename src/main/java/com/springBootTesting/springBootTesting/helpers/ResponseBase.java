@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-public class responseBase {
+public class ResponseBase {
 
-    private static final Logger LOG = LoggerFactory.getLogger(responseBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ResponseBase.class);
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<String> handleNoSuchElementFoundException(

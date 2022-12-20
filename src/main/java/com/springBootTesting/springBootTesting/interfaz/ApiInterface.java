@@ -11,7 +11,7 @@ import com.springBootTesting.springBootTesting.model.Movie;
 
 import info.movito.themoviedbapi.model.MovieDb;
 
-public interface apiInterface {
+public interface ApiInterface {
 
     public List<MovieDb> createMoviesList();
     public ResponseEntity<List<Movie>> index();

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springBootTesting.springBootTesting.helpers.responseBase;
-import com.springBootTesting.springBootTesting.interfaz.movieDbInterface;
-import com.springBootTesting.springBootTesting.services.movieDbService;
+import com.springBootTesting.springBootTesting.helpers.ResponseBase;
+import com.springBootTesting.springBootTesting.interfaz.MovieDbInterface;
+import com.springBootTesting.springBootTesting.utilities.movieDbUtility;
 
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
@@ -20,11 +20,11 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/movies")
-public class movieDbController extends responseBase implements movieDbInterface{
+public class MovieDbController extends ResponseBase implements MovieDbInterface{
 
-    private static final Logger LOG = LoggerFactory.getLogger(movieController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MovieApiController.class);
 
-    protected movieDbService movieServiceDb = new movieDbService();
+    protected movieDbUtility movieServiceDb = new movieDbUtility();
 
     @GetMapping("/list")
     public List<MovieDb> moviesList() {

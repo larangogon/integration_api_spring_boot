@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springBootTesting.springBootTesting.model.Movie;
 
 
-public interface webInterface {
+public interface WebInterface {
 
     public ModelAndView index(
         @RequestParam(required = false, defaultValue = "0") Integer page,

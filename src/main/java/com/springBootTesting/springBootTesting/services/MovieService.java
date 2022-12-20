@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springBootTesting.springBootTesting.Repoisitory.movieRepository;
 import com.springBootTesting.springBootTesting.model.Movie;
+import com.springBootTesting.springBootTesting.repoisitories.MovieRepository;
 
 @Service
-public class movieService {
+public class MovieService {
 
     @Autowired
-    private movieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     public List<Movie> getAllMovies() {
         List<Movie> list = (List<Movie>) movieRepository.findAll();

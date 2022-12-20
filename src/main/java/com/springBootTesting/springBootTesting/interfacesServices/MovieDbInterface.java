@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
-public interface movieDbInterface {
+public interface MovieDbInterface {
 
     public MovieDb getMovieInfoDB(@PathVariable("movieId") Integer movieId);
 

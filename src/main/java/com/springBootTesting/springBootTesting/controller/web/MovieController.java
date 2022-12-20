@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springBootTesting.springBootTesting.helpers.responseBase;
-import com.springBootTesting.springBootTesting.interfaz.webInterface;
+import com.springBootTesting.springBootTesting.helpers.ResponseBase;
+import com.springBootTesting.springBootTesting.interfaz.WebInterface;
 import com.springBootTesting.springBootTesting.model.Movie;
-import com.springBootTesting.springBootTesting.services.movieService;
+import com.springBootTesting.springBootTesting.services.MovieService;
 
 
 @CrossOrigin
 @RestController
 @RequestMapping("/movies")
-public class movie extends responseBase implements webInterface{
+public class MovieController extends ResponseBase implements WebInterface{
 
-    private static final Logger LOG = LoggerFactory.getLogger(movie.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MovieController.class);
 
     @Autowired
-    private movieService movieServices;
+    private MovieService movieServices;
 
     @Override
     @RequestMapping("/")
