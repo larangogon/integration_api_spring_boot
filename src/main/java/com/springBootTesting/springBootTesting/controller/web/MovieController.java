@@ -1,11 +1,16 @@
 package com.springBootTesting.springBootTesting.controller.web;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,20 +40,27 @@ public class MovieController extends ResponseBase implements WebInterface{
 
     @Override
     @RequestMapping("/")
-    public ModelAndView index(   
-        @RequestParam(required = false, defaultValue = "0") Integer page,
-        @RequestParam(required = false, defaultValue = "20") Integer size,
-        @RequestParam(required = false, defaultValue = "false") Boolean enablePagination
-    ) {
+    public String index(@RequestParam Map<String, Object> params, Model model) {
         LOG.info("index");
 
-        List<Movie> list = (List<Movie>) movieServices.getAllMovies();
-    
-        ModelAndView mav = new ModelAndView("index");
+        int page = params.get("page") != null 
+            ? (Integer.valueOf(params.get("page").toString()) -1) 
+            : 0;
 
-        mav.addObject("movies", list);
+        PageRequest pageRequest = PageRequest.of(page,20);
 
-        return mav;
+        Page<Movie> pageMovie =  movieServices.getAll(pageRequest);
+
+        int totalPage = pageMovie.getTotalPages();
+
+        if(totalPage > 0){
+            List<Integer> pages = IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+        }
+
+        model.addAttribute("movies", pageMovie.getContent());
+
+        return "index";
     }
 
     @GetMapping("/show/{id}")
