@@ -58,4 +58,8 @@ public class MovieService {
     public Optional<Movie> findById(Integer id){
         return movieRepository.findById(id);
     }
+
+    public String greet() {
+		return "Hello, World";
+	}
 }
