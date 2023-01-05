@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootTestingApplication {
 
 	public static void main(String[] args) {
+		//dd === sou
+		System.out.println();
 
 		SpringApplication.run(SpringBootTestingApplication.class, args);
 	}
