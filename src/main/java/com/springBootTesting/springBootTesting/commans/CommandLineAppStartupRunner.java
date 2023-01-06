@@ -17,7 +17,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         for (int i = 0; i < 10; i++) {
-            stringProducer.sendMessage("Hello kafka !! " + i, "message");
+            stringProducer.sendMessage("message");
             Thread.sleep(2000);
         }
     }

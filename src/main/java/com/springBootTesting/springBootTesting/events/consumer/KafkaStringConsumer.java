@@ -17,7 +17,7 @@ public class KafkaStringConsumer {
         System.out.println("Recieved Message of topic1 in  listener: " + message);
     }
 	
-	   @KafkaListener(topics = "${message.topic.name2:profesorp-group}", groupId = "${message.group.name:profegroup}")
+	@KafkaListener(topics = "${message.topic.name2:profesorp-group}", groupId = "${message.group.name:profegroup}")
 
     public void listenTopic2(String message) {
         logger.info("Consuming Message {}", message);

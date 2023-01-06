@@ -1,7 +1,6 @@
 package com.springBootTesting.springBootTesting.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,14 +8,21 @@ import com.springBootTesting.springBootTesting.events.producer.KafkaStringProduc
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class KafkaTestController {
 	@Autowired
 	KafkaStringProducer kafkaMessageProducer;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaTestController.class);
 	
 	@PostMapping("/add/{topic}")
-	public void addIdCustomer( @PathVariable String topic,@RequestBody  String body)
+	public void addIdCustomer(@RequestBody  String body)
 	{
-		kafkaMessageProducer.sendMessage(topic,body);
+        LOGGER.error(body);
+
+		kafkaMessageProducer.sendMessage(body);
 	}
 }

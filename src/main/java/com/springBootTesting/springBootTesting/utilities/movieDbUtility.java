@@ -20,7 +20,7 @@ public class movieDbUtility extends ResponseBase implements MovieDbInterface{
     public MovieDb getMovieInfoDB(@PathVariable("movieId") Integer movieId) {
         LOG.info("Detail of the movie in api bd...");
 
-        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_NAME).getMovies();
+        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_KEY).getMovies();
 
         MovieDb movie = movies.getMovie(movieId, "en"); 
 
@@ -30,7 +30,7 @@ public class movieDbUtility extends ResponseBase implements MovieDbInterface{
     public MovieResultsPage getPopularMovies() {
         LOG.info("getPopularMovies...");
 
-        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_NAME).getMovies();
+        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_KEY).getMovies();
 
         MovieResultsPage moviesPMovieResultsPage = movies.getPopularMovies(null, null);
 
@@ -40,7 +40,7 @@ public class movieDbUtility extends ResponseBase implements MovieDbInterface{
     public MovieResultsPage getRatingMovie(@PathVariable("movieId") Integer movieId) {
         LOG.info("ratingMovie");
 
-        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_NAME).getMovies();
+        TmdbMovies movies = new TmdbApi(propertyConfiuration.PROPERTY_KEY).getMovies();
 
         MovieResultsPage movie = movies.getTopRatedMovies("en", movieId);
 
