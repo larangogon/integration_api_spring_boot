@@ -19,9 +19,9 @@ public class KafkaTestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaTestController.class);
 	
 	@PostMapping("/add/{topic}")
-	public void addIdCustomer(@RequestBody  String body)
+	public void addIdCustomer(@RequestBody String body)
 	{
-        LOGGER.error(body);
+        LOGGER.info(body);
 
 		kafkaMessageProducer.sendMessage(body);
 	}
