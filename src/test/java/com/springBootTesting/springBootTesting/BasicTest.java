@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.springBootTesting.springBootTesting.controller.web.MovieController;
+import com.springBootTesting.controller.web.MovieController;
 
 
 @SpringBootTest

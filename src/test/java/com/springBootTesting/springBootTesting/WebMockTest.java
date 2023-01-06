@@ -14,8 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.springBootTesting.springBootTesting.controller.web.MovieController;
-import com.springBootTesting.springBootTesting.services.MovieService;
+import com.springBootTesting.controller.web.MovieController;
+import com.springBootTesting.services.MovieService;
 
 @WebMvcTest(MovieController.class)
 public class WebMockTest {
